@@ -18,11 +18,15 @@ const getCouponsByType = async () => {
   }
 };
 
-const getDiscountStatistics = async (promotion_type) => {
+const getDiscountStatistics = async (
+  promotionType,
+  filterByRetailer = false
+) => {
+  const URL = filterByRetailer
+    ? `${BASE_URL}/discount-statistics-by-retailer?promotion_type=${promotionType}`
+    : `${BASE_URL}/discount-statistics?promotion_type=${promotionType}`;
   try {
-    const data = await fetch(
-      `${BASE_URL}/discount-statistics?promotion_type=${promotion_type}`
-    );
+    const data = await fetch(URL);
     const statistics = await data.json();
     return statistics;
   } catch (error) {

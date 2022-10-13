@@ -3,6 +3,7 @@
   <StatisticsByPromotionType
     :statistics="statistics"
     @selectedPromotion="setPromotionType"
+    @filterByRetailer="filterByRetailer"
   />
 </template>
 
@@ -25,19 +26,26 @@ export default {
     return {
       couponsByType: { type: Object },
       statistics: { type: Object },
-      promotion_type: { type: String },
+      promotionType: { type: String },
     };
   },
   methods: {
     async getCoupons() {
       this.couponsByType = await getCouponsByType();
     },
-    async getStatistics(promotion_type) {
-      this.statistics = await getDiscountStatistics(promotion_type);
+    async getStatistics(promotionType, filterByRetailer) {
+      this.statistics = await getDiscountStatistics(
+        promotionType,
+        filterByRetailer
+      );
     },
-    setPromotionType(promotion_type) {
-      this.promotion_type = promotion_type;
-      this.getStatistics(promotion_type);
+    setPromotionType(promotionType, filterByRetailer = false) {
+      this.promotionType = promotionType;
+      this.getStatistics(promotionType, filterByRetailer);
+    },
+
+    filterByRetailer(filter) {
+      this.getStatistics(this.promotionType, filter);
     },
   },
   created() {

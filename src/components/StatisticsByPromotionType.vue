@@ -1,5 +1,12 @@
 <template>
   <h1>Statistics</h1>
+  <input
+    type="checkbox"
+    id="checkbox"
+    v-model="filterByRetailer"
+    @change="$emit('filterByRetailer', filterByRetailer)"
+  />
+  <label for="checkbox">Filter by Retailer</label>
   <select
     v-model="selectedPromotionType"
     @change="$emit('selectedPromotion', selectedPromotionType)"
@@ -21,11 +28,12 @@ export default {
     {
       return {
         selectedPromotionType: PROMOTION_TYPES.DOLLAR_OFF,
+        filterByRetailer: false,
         PROMOTION_TYPES: PROMOTION_TYPES,
       };
     }
   },
-  emits: ['selectedPromotion'],
+  emits: ['selectedPromotion', 'filterByRetailer'],
 };
 </script>
 <style></style>
