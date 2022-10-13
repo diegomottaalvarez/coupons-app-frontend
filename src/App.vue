@@ -1,40 +1,14 @@
 <template>
-  <CouponsByType :coupons="couponsByType" />
+  <SummaryPage />
 </template>
-
 <script>
-import {
-  getCouponsByType,
-  getDiscountStatistics,
-  PROMOTION_TYPES,
-} from './helpers/getStatistics';
-import CouponsByType from './components/CouponsByType.vue';
-
+import SummaryPage from './pages/SummaryPage';
 export default {
-  name: 'App',
   components: {
-    CouponsByType,
-  },
-  data() {
-    return {
-      couponsByType: { type: Object },
-    };
-  },
-  methods: {
-    async getCoupons() {
-      this.couponsByType = await getCouponsByType();
-    },
-    getStatistics() {
-      console.log(getDiscountStatistics(PROMOTION_TYPES.DOLLAR_OFF));
-    },
-  },
-  created() {
-    this.getCoupons();
-    this.getStatistics();
+    SummaryPage,
   },
 };
 </script>
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
