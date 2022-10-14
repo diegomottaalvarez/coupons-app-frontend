@@ -18,4 +18,10 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
+@media (max-width: 1217px) {
+  .coupons-type-container {
+    align-items: center;
+  }
+}
 </style>

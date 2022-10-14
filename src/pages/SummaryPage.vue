@@ -69,4 +69,10 @@ export default {
   margin: 2rem 5rem;
   justify-content: space-evenly;
 }
+
+@media (max-width: 1217px) {
+  .main-container {
+    flex-direction: column;
+  }
+}
 </style>

@@ -23,11 +23,13 @@
         }}</option>
       </select>
     </div>
-    <StatisticsByPromotionTypeChart
-      :statistics="statistics"
-      :selectedPromotionType="selectedPromotionType"
-      :filterByRetailer="filterByRetailer"
-  /></div>
+    <div class="statistics-promotion-container">
+      <StatisticsByPromotionTypeChart
+        :statistics="statistics"
+        :selectedPromotionType="selectedPromotionType"
+        :filterByRetailer="filterByRetailer"
+    /></div>
+  </div>
 </template>
 
 <script>
@@ -60,5 +62,13 @@ export default {
 .filters-container {
   display: flex;
   justify-content: space-evenly;
+}
+
+@media (max-width: 1217px) {
+  .statistics-promotion-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
 }
 </style>

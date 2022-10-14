@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="chart-container">
     <canvas id="couponsByTypeChart"></canvas>
   </div>
 </template>
@@ -32,7 +32,20 @@ export default {
 };
 </script>
 <style scoped>
-div {
-  width: 600px;
+div.chart-container {
+  position: relative;
+  width: 35vw;
+}
+
+@media (max-width: 1217px) {
+  div.chart-container {
+    width: 60vw;
+  }
+}
+
+@media (max-width: 800px) {
+  div.chart-container {
+    width: 75vw;
+  }
 }
 </style>
