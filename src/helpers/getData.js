@@ -1,13 +1,5 @@
 const BASE_URL = 'http://localhost:4000/api/coupons';
 
-const PROMOTION_TYPES = {
-  PERCENT_OFF: 'percent-off',
-  BUY_ONE_GET_ONE: 'buy-one-get-one',
-  FREE_GIFT: 'free-gift',
-  FREE_SHIPPING: 'free-shipping',
-  DOLLAR_OFF: 'dollar-off',
-};
-
 const getCouponsByType = async () => {
   try {
     const data = await fetch(`${BASE_URL}/count-coupons-by-type`);
@@ -34,4 +26,4 @@ const getDiscountStatistics = async (
   }
 };
 
-export { getCouponsByType, getDiscountStatistics, PROMOTION_TYPES };
+export { getCouponsByType, getDiscountStatistics };

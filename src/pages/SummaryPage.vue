@@ -1,18 +1,21 @@
 <template>
-  <CouponsByType :coupons="couponsByType" />
-  <StatisticsByPromotionType
-    :statistics="statistics"
-    @selectedPromotion="setPromotionType"
-    @filterByRetailer="filterByRetailer"
-  />
+  <h1>Coupons Data</h1>
+  <div class="main-container">
+    <CouponsByType v-if="couponsByType" :coupons="couponsByType" />
+    <StatisticsByPromotionType
+      v-if="statistics"
+      :statistics="statistics"
+      :filterByRetailer="filterByRetailer"
+      :selectedPromotionType="promotionType"
+      @selectedPromotion="setPromotionType"
+      @filterByRetailer="setFilterByRetailer"
+    />
+  </div>
 </template>
 
 <script>
-import {
-  getCouponsByType,
-  getDiscountStatistics,
-  PROMOTION_TYPES,
-} from '../helpers/getData';
+import { getCouponsByType, getDiscountStatistics } from '../helpers/getData';
+import { PROMOTION_TYPES } from '../helpers/dataUtils';
 import CouponsByType from '../components/CouponsByType.vue';
 import StatisticsByPromotionType from '../components/StatisticsByPromotionType';
 
@@ -24,34 +27,46 @@ export default {
   },
   data() {
     return {
-      couponsByType: { type: Object },
-      statistics: { type: Object },
-      promotionType: { type: String },
+      couponsByType: null,
+      statistics: null,
+      PROMOTION_TYPES: PROMOTION_TYPES,
+      promotionType: null,
+      filterByRetailer: null,
     };
   },
   methods: {
     async getCoupons() {
       this.couponsByType = await getCouponsByType();
     },
-    async getStatistics(promotionType, filterByRetailer) {
+    async getStatistics() {
       this.statistics = await getDiscountStatistics(
-        promotionType,
-        filterByRetailer
+        this.promotionType,
+        this.filterByRetailer
       );
     },
-    setPromotionType(promotionType, filterByRetailer = false) {
+    setPromotionType(promotionType) {
       this.promotionType = promotionType;
-      this.getStatistics(promotionType, filterByRetailer);
+      this.getStatistics();
     },
 
-    filterByRetailer(filter) {
-      this.getStatistics(this.promotionType, filter);
+    setFilterByRetailer(filter) {
+      this.filterByRetailer = filter;
+      this.getStatistics();
     },
   },
   created() {
+    this.promotionType = PROMOTION_TYPES.DOLLAR_OFF;
     this.getCoupons();
-    this.setPromotionType(PROMOTION_TYPES.DOLLAR_OFF);
+    this.getStatistics();
   },
 };
 </script>
-<style></style>
+<style scoped>
+@import '../assets/styles/styles.css';
+
+.main-container {
+  display: flex;
+  margin: 2rem 5rem;
+  justify-content: space-evenly;
+}
+</style>
