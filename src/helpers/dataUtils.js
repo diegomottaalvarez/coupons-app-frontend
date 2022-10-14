@@ -8,7 +8,7 @@ const PROMOTION_TYPES = {
 
 const parsePromotionTypeName = (promotionType) => {
   return promotionType.split('-').map((item) => {
-    return `${item[0].toUpperCase()}${item.substr(1)}`;
+    return `${item[0].toUpperCase()}${item.substring(1)}`;
   }).join` `;
 };
 

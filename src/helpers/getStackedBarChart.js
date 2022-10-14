@@ -3,7 +3,9 @@ import { PROMOTION_TYPES, parsePromotionTypeName } from './dataUtils';
 const parseSingleDataToChart = (statistics, promotionType) => {
   const { min, max, average, total } = statistics;
   const labels = [
-    `Statistics for ${parsePromotionTypeName(promotionType)}: Total ${total}`,
+    `Statistics for ${parsePromotionTypeName(
+      promotionType
+    )}: ${total} coupons total`,
   ];
   const parsedData = { min: [min], max: [max], average: [average] };
   return { labels, parsedData, yText: getYAxeLabel(promotionType) };
@@ -15,7 +17,8 @@ const parseRetailersDataToChart = (retailerStatistics, promotionType) => {
   const average = Object.values(retailerStatistics).map((item) => item.average);
   const total = Object.values(retailerStatistics).map((item) => item.total);
   const labels = Object.keys(retailerStatistics).map(
-    (item, index) => `${item}: ${total[index]}`
+    (item, index) =>
+      `${item[0].toUpperCase()}${item.substring(1)}: ${total[index]} coupons`
   );
 
   const parsedData = { min, max, average, total };
